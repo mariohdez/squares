@@ -46,6 +46,17 @@ function addSquare() {
     squareArea.appendChild(square);
 }
 
+function addTriangle() {
+    let squareArea = document.getElementById("squarearea");
+    let triangle = document.createElement("div");
+
+    triangle.className = "triangle";
+    triangle.style.left = parseInt(Math.random() * 650) + "px";
+    triangle.style.top = parseInt(Math.random() * 250) + "px";
+    triangle.style.borderBottomColor = getRandomColor();
+    squareArea.appendChild(triangle);
+}
+
 function generateInitialSquares() {
     const numberOfSquares = parseInt(Math.random() * 21) + 30;
     let i = 0;
@@ -60,8 +71,9 @@ window.onload = function () {
 
     let addSquareButton = document.getElementById("add");
     let changeColorsButton = document.getElementById("colors");
+    let addTriangleButton = document.getElementById("add-triangle");
 
     addSquareButton.onclick = addSquare;
     changeColorsButton.onclick = changeColors;
+    addTriangleButton.onclick = addTriangle;
 };
-
