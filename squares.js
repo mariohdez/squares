@@ -6,6 +6,7 @@ function getRandomColor() {
     let numbers = "0123456789abcdef";
     let result = "#";
     let i = 0;
+
     for (i = 0; i < 6; i += 1) {
         result += numbers.charAt(parseInt(Math.random() * numbers.length));
     }
@@ -15,6 +16,7 @@ function getRandomColor() {
 function changeColors() {
     const squares = document.querySelectorAll("#squarearea div");
     let i = 0;
+
     for (i = 0; i < squares.length; i += 1) {
         squares[i].style.backgroundColor = getRandomColor();
     }
@@ -23,6 +25,7 @@ function changeColors() {
 function squareClick(mouseEvent) {
     const square = mouseEvent.target;
     const oldZIndex = parseInt(square.style.zIndex);
+
     if (oldZIndex === maxZ) {
         square.parentNode.removeChild(square);
     } else {
@@ -34,6 +37,7 @@ function squareClick(mouseEvent) {
 function addSquare() {
     let squareArea = document.getElementById("squarearea");
     let square = document.createElement("div");
+
     square.onclick = squareClick;
     square.className = "square";
     square.style.left = parseInt(Math.random() * 650) + "px";
@@ -45,6 +49,7 @@ function addSquare() {
 function generateInitialSquares() {
     const numberOfSquares = parseInt(Math.random() * 21) + 30;
     let i = 0;
+
     for (i = 0; i < numberOfSquares; i += 1) {
         addSquare();
     }
@@ -52,8 +57,11 @@ function generateInitialSquares() {
 
 window.onload = function () {
     generateInitialSquares();
+
     let addSquareButton = document.getElementById("add");
     let changeColorsButton = document.getElementById("colors");
+
     addSquareButton.onclick = addSquare;
     changeColorsButton.onclick = changeColors;
 };
+
