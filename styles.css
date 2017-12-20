@@ -12,3 +12,13 @@
     border: 2px solid black;
     position: relative;
 }
+
+.triangle {
+    font-size: 0px;
+    line-height: 0%;
+    width: 0px;
+    border-bottom: 20px solid black;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    position: absolute;
+}
