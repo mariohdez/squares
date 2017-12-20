@@ -5,16 +5,29 @@ let maxZ = 1000;
 function getRandomColor() {
     let numbers = "0123456789abcdef";
     let result = "#";
-    for (let i = 0; i < 6; ++i) {
+    let i = 0;
+    for (i = 0; i < 6; i += 1) {
         result += numbers.charAt(parseInt(Math.random() * numbers.length));
     }
     return result;
 }
 
-function generateInitialSquares() {
-    const numberOfSquares = parseInt(Math.random() * 21) + 30;
-    for (let i = 0; i < numberOfSquares; ++i) {
-        addSquare();
+function changeColors() {
+    const squares = document.querySelectorAll("#squarearea div");
+    let i = 0;
+    for (i = 0; i < squares.length; i += 1) {
+        squares[i].style.backgroundColor = getRandomColor();
+    }
+}
+
+function squareClick(mouseEvent) {
+    const square = mouseEvent.target;
+    const oldZIndex = parseInt(square.style.zIndex);
+    if (oldZIndex === maxZ) {
+        square.parentNode.removeChild(square);
+    } else {
+        maxZ += 1;
+        square.style.zIndex = maxZ;
     }
 }
 
@@ -29,21 +42,11 @@ function addSquare() {
     squareArea.appendChild(square);
 }
 
-function changeColors() {
-    const squares = document.querySelectorAll("#squarearea div");
-    for (let i = 0; i < squares.length; ++i) {
-        squares[i].style.backgroundColor = getRandomColor();
-    }
-}
-
-function squareClick(mouseEvent) {
-    const square = mouseEvent.target;
-    const oldZIndex = parseInt(square.style.zIndex);
-    if (oldZIndex === maxZ) {
-        square.parentNode.removeChild(square);
-    } else {
-        maxZ++;
-        square.style.zIndex = maxZ;
+function generateInitialSquares() {
+    const numberOfSquares = parseInt(Math.random() * 21) + 30;
+    let i = 0;
+    for (i = 0; i < numberOfSquares; i += 1) {
+        addSquare();
     }
 }
 
