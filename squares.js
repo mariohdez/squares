@@ -110,9 +110,7 @@ function changeBackground(){
             else
                 squareArea.style.backgroundImage = "url('" + respURL + "')";
         }
-    };
-
-    
+    };    
 }
 
 function generateInitialSquares() {
