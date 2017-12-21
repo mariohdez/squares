@@ -26,6 +26,17 @@ function getRandomPolygonArgs() {
     return result;
 }
 
+function getRandomImgurURL() {
+    let alphanum = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let result = "http://i.imgur.com/";
+    let i = 0;
+
+    for (i = 0; i < 5; i += 1) {
+        result += alphanum.charAt(parseInt(Math.random() * alphanum.length));
+    }
+    return result + ".gif";
+}
+
 function changeColors() {
     const squares = document.querySelectorAll("#squarearea div");
     let i = 0;
@@ -82,6 +93,28 @@ function addPolygon(){
     squareArea.appendChild(polygon);
 }
 
+function changeBackground(){
+    let squareArea = document.getElementById("squarearea");
+    let imgurURL = getRandomImgurURL();;
+    let xhttp = new XMLHttpRequest();
+    const badURL = "http://i.imgur.com/removed.png";
+
+    xhttp.open("GET", imgurURL, true);
+    xhttp.setRequestHeader("Content-type", "image/jpeg");
+    xhttp.send();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            let respURL = xhttp.responseURL;
+            if (respURL == badURL)
+                changeBackground();
+            else
+                squareArea.style.backgroundImage = "url('" + respURL + "')";
+        }
+    };
+
+    
+}
+
 function generateInitialSquares() {
     const numberOfSquares = parseInt(Math.random() * 21) + 30;
     let i = 0;
@@ -98,9 +131,11 @@ window.onload = function () {
     let changeColorsButton = document.getElementById("colors");
     let addTriangleButton = document.getElementById("add-triangle");
     let addPolygonButton = document.getElementById("add-polygon");
+    let changeBackgroundButton = document.getElementById("random-background")
 
     addSquareButton.onclick = addSquare;
     changeColorsButton.onclick = changeColors;
     addTriangleButton.onclick = addTriangle;
     addPolygonButton.onclick = addPolygon;
+    changeBackgroundButton.onclick = changeBackground;
 };
