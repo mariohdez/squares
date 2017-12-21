@@ -13,6 +13,19 @@ function getRandomColor() {
     return result;
 }
 
+function getRandomPolygonArgs() {
+    let rand = parseInt(Math.random() * 20);
+    let result = "("
+    let i = 0;
+
+    for (i = 0; i < rand; i += 1) {
+        result += parseInt(Math.random() * 100) + "% ";
+        result += parseInt(Math.random() * 100) + "%, ";
+    }
+    result = result.slice(0, -2) + ")";
+    return result;
+}
+
 function changeColors() {
     const squares = document.querySelectorAll("#squarearea div");
     let i = 0;
@@ -57,6 +70,18 @@ function addTriangle() {
     squareArea.appendChild(triangle);
 }
 
+function addPolygon(){
+    let squareArea = document.getElementById("squarearea");
+    let polygon = document.createElement("div");
+
+    polygon.className = "polygon";
+    polygon.style.clipPath = "polygon" + getRandomPolygonArgs();
+    polygon.style.left = parseInt(Math.random() * 650) + "px";
+    polygon.style.top = parseInt(Math.random() * 250) + "px";
+    polygon.style.backgroundColor = getRandomColor();
+    squareArea.appendChild(polygon);
+}
+
 function generateInitialSquares() {
     const numberOfSquares = parseInt(Math.random() * 21) + 30;
     let i = 0;
@@ -72,8 +97,10 @@ window.onload = function () {
     let addSquareButton = document.getElementById("add");
     let changeColorsButton = document.getElementById("colors");
     let addTriangleButton = document.getElementById("add-triangle");
+    let addPolygonButton = document.getElementById("add-polygon");
 
     addSquareButton.onclick = addSquare;
     changeColorsButton.onclick = changeColors;
     addTriangleButton.onclick = addTriangle;
+    addPolygonButton.onclick = addPolygon;
 };
