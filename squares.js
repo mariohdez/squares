@@ -81,7 +81,7 @@ function addTriangle() {
     squareArea.appendChild(triangle);
 }
 
-function addPolygon(){
+function addPolygon() {
     let squareArea = document.getElementById("squarearea");
     let polygon = document.createElement("div");
 
@@ -93,7 +93,7 @@ function addPolygon(){
     squareArea.appendChild(polygon);
 }
 
-function changeBackground(){
+function changeBackground() {
     let squareArea = document.getElementById("squarearea");
     let imgurURL = getRandomImgurURL();;
     let xhttp = new XMLHttpRequest();
@@ -102,7 +102,7 @@ function changeBackground(){
     xhttp.open("GET", imgurURL, true);
     xhttp.setRequestHeader("Content-type", "image/jpeg");
     xhttp.send();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
             let respURL = xhttp.responseURL;
             if (respURL == badURL)
@@ -110,7 +110,7 @@ function changeBackground(){
             else
                 squareArea.style.backgroundImage = "url('" + respURL + "')";
         }
-    };    
+    };
 }
 
 function generateInitialSquares() {
