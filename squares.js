@@ -38,11 +38,17 @@ function getRandomImgurURL() {
 }
 
 function changeColors() {
-    const squares = document.querySelectorAll("#squarearea div");
+    const shapes = document.querySelectorAll("#squarearea div");
     let i = 0;
 
-    for (i = 0; i < squares.length; i += 1) {
-        squares[i].style.backgroundColor = getRandomColor();
+    for (i = 0; i < shapes.length; i += 1) {
+        if (shapes[i].classList.contains("square")) {
+            shapes[i].style.backgroundColor = getRandomColor();
+        } else if (shapes[i].classList.contains("triangle")) {
+            shapes[i].style.borderBottomColor = getRandomColor();
+        } else {
+            shapes[i].style.backgroundColor = getRandomColor();
+        }
     }
 }
 
@@ -122,7 +128,7 @@ function generateInitialSquares() {
     }
 }
 
-window.onload = function () {
+window.onload = () => {
     generateInitialSquares();
 
     let addSquareButton = document.getElementById("add");
