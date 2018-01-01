@@ -56,12 +56,11 @@ let squaresApp = {
     squareClick: function (mouseEvent) {
         const square = mouseEvent.target;
         const oldZIndex = parseInt(square.style.zIndex);
-
-        if (oldZIndex === maxZ) {
+        if (oldZIndex === this.maxZ) {
             square.parentNode.removeChild(square);
         } else {
-            maxZ += 1;
-            square.style.zIndex = maxZ;
+            this.maxZ += 1;
+            square.style.zIndex = this.maxZ;
         }
     },
 
