@@ -3,7 +3,7 @@
 let squaresApp = {
     maxZ: 1000,
 
-    getRandomColor: () => {
+    getRandomColor: function () {
         let numbers = "0123456789abcdef";
         let result = "#";
         let i = 0;
@@ -14,7 +14,7 @@ let squaresApp = {
         return result;
     },
 
-    getRandomPolygonArgs: () => {
+    getRandomPolygonArgs: function () {
         let rand = parseInt(Math.random() * 20);
         let result = "("
         let i = 0;
@@ -27,7 +27,7 @@ let squaresApp = {
         return result;
     },
 
-    getRandomImgurURL: () => {
+    getRandomImgurURL: function () {
         let alphanum = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         let result = "http://i.imgur.com/";
         let i = 0;
@@ -38,22 +38,22 @@ let squaresApp = {
         return result + ".gif";
     },
 
-    changeColors: () => {
+    changeColors: function () {
         const shapes = document.querySelectorAll("#squarearea div");
         let i = 0;
 
         for (i = 0; i < shapes.length; i += 1) {
             if (shapes[i].classList.contains("square")) {
-                shapes[i].style.backgroundColor = getRandomColor();
+                shapes[i].style.backgroundColor = squaresApp.getRandomColor();
             } else if (shapes[i].classList.contains("triangle")) {
-                shapes[i].style.borderBottomColor = getRandomColor();
+                shapes[i].style.borderBottomColor = squaresApp.getRandomColor();
             } else {
-                shapes[i].style.backgroundColor = getRandomColor();
+                shapes[i].style.backgroundColor = squaresApp.getRandomColor();
             }
         }
     },
 
-    squareClick: (mouseEvent) => {
+    squareClick: function (mouseEvent) {
         const square = mouseEvent.target;
         const oldZIndex = parseInt(square.style.zIndex);
 
@@ -65,44 +65,44 @@ let squaresApp = {
         }
     },
 
-    addSquare: () => {
+    addSquare: function () {
         let squareArea = document.getElementById("squarearea");
         let square = document.createElement("div");
 
-        square.onclick = squareClick;
+        square.onclick = squaresApp.squareClick;
         square.className = "square";
         square.style.left = parseInt(Math.random() * 650) + "px";
         square.style.top = parseInt(Math.random() * 250) + "px";
-        square.style.backgroundColor = getRandomColor();
+        square.style.backgroundColor = squaresApp.getRandomColor();
         squareArea.appendChild(square);
     },
 
-    addTriangle: () => {
+    addTriangle: function () {
         let squareArea = document.getElementById("squarearea");
         let triangle = document.createElement("div");
 
         triangle.className = "triangle";
         triangle.style.left = parseInt(Math.random() * 650) + "px";
         triangle.style.top = parseInt(Math.random() * 250) + "px";
-        triangle.style.borderBottomColor = getRandomColor();
+        triangle.style.borderBottomColor = squaresApp.getRandomColor();
         squareArea.appendChild(triangle);
     },
 
-    addPolygon: () => {
+    addPolygon: function () {
         let squareArea = document.getElementById("squarearea");
         let polygon = document.createElement("div");
 
         polygon.className = "polygon";
-        polygon.style.clipPath = "polygon" + getRandomPolygonArgs();
+        polygon.style.clipPath = "polygon" + squaresApp.getRandomPolygonArgs();
         polygon.style.left = parseInt(Math.random() * 650) + "px";
         polygon.style.top = parseInt(Math.random() * 250) + "px";
-        polygon.style.backgroundColor = getRandomColor();
+        polygon.style.backgroundColor = squaresApp.getRandomColor();
         squareArea.appendChild(polygon);
     },
 
-    changeBackground: () => {
+    changeBackground: function () {
         let squareArea = document.getElementById("squarearea");
-        let imgurURL = getRandomImgurURL();;
+        let imgurURL = squaresApp.getRandomImgurURL();;
         let xhttp = new XMLHttpRequest();
         const badURL = "http://i.imgur.com/removed.png";
 
@@ -113,19 +113,19 @@ let squaresApp = {
             if (this.readyState == 4) {
                 let respURL = xhttp.responseURL;
                 if (respURL == badURL)
-                    changeBackground();
+                    squaresApp.changeBackground();
                 else
                     squareArea.style.backgroundImage = "url('" + respURL + "')";
             }
         };
     },
 
-    generateInitialSquares: () => {
+    generateInitialSquares: function () {
         const numberOfSquares = parseInt(Math.random() * 21) + 30;
         let i = 0;
 
         for (i = 0; i < numberOfSquares; i += 1) {
-            addSquare();
+            squaresApp.addSquare();
         }
     }
 };
