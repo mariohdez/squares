@@ -1,7 +1,7 @@
 "use strict";
 
 let squaresApp = {
-    maxZ = 1000,
+    maxZ: 1000,
 
     getRandomColor: () => {
         let numbers = "0123456789abcdef";
