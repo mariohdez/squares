@@ -3,6 +3,8 @@
 let squaresApp = {
     maxZ: 1000,
 
+    triangle: "triangle",
+
     getRandomColor: function () {
         let numbers = "0123456789abcdef";
         let result = "#";
@@ -56,11 +58,12 @@ let squaresApp = {
     squareClick: function (mouseEvent) {
         const square = mouseEvent.target;
         const oldZIndex = parseInt(square.style.zIndex);
-        if (oldZIndex === this.maxZ) {
+
+        if (oldZIndex === squaresApp.maxZ) {
             square.parentNode.removeChild(square);
         } else {
-            this.maxZ += 1;
-            square.style.zIndex = this.maxZ;
+            squaresApp.maxZ += 1;
+            square.style.zIndex = squaresApp.maxZ;
         }
     },
 
@@ -101,7 +104,7 @@ let squaresApp = {
 
     changeBackground: function () {
         let squareArea = document.getElementById("squarearea");
-        let imgurURL = squaresApp.getRandomImgurURL();;
+        let imgurURL = squaresApp.getRandomImgurURL();
         let xhttp = new XMLHttpRequest();
         const badURL = "http://i.imgur.com/removed.png";
 
@@ -111,10 +114,11 @@ let squaresApp = {
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4) {
                 let respURL = xhttp.responseURL;
-                if (respURL == badURL)
+                if (respURL == badURL) {
                     squaresApp.changeBackground();
-                else
+                } else {
                     squareArea.style.backgroundImage = "url('" + respURL + "')";
+                }
             }
         };
     },
@@ -136,7 +140,7 @@ window.onload = () => {
     let changeColorsButton = document.getElementById("colors");
     let addTriangleButton = document.getElementById("add-triangle");
     let addPolygonButton = document.getElementById("add-polygon");
-    let changeBackgroundButton = document.getElementById("random-background")
+    let changeBackgroundButton = document.getElementById("random-background");
 
     addSquareButton.onclick = squaresApp.addSquare;
     changeColorsButton.onclick = squaresApp.changeColors;
