@@ -47,7 +47,7 @@ let squaresApp = {
         for (i = 0; i < shapes.length; i += 1) {
             if (shapes[i].classList.contains("square")) {
                 shapes[i].style.backgroundColor = squaresApp.getRandomColor();
-            } else if (shapes[i].classList.contains("triangle")) {
+            } else if (shapes[i].classList.contains(squaresApp.triangle) {
                 shapes[i].style.borderBottomColor = squaresApp.getRandomColor();
             } else {
                 shapes[i].style.backgroundColor = squaresApp.getRandomColor();
@@ -83,7 +83,7 @@ let squaresApp = {
         let squareArea = document.getElementById("squarearea");
         let triangle = document.createElement("div");
 
-        triangle.className = "triangle";
+        triangle.className = squaresApp.triangle;
         triangle.style.left = parseInt(Math.random() * 650) + "px";
         triangle.style.top = parseInt(Math.random() * 250) + "px";
         triangle.style.borderBottomColor = squaresApp.getRandomColor();
