@@ -90,37 +90,9 @@ let squaresApp = {
         squareArea.appendChild(triangle);
     },
 
-    addPolygon: function () {
-        let squareArea = document.getElementById("squarearea");
-        let polygon = document.createElement("div");
-
-        polygon.className = "polygon";
-        polygon.style.clipPath = "polygon" + squaresApp.getRandomPolygonArgs();
-        polygon.style.left = parseInt(Math.random() * 650) + "px";
-        polygon.style.top = parseInt(Math.random() * 250) + "px";
-        polygon.style.backgroundColor = squaresApp.getRandomColor();
-        squareArea.appendChild(polygon);
-    },
-
     changeBackground: function () {
         let squareArea = document.getElementById("squarearea");
-        let imgurURL = squaresApp.getRandomImgurURL();
-        let xhttp = new XMLHttpRequest();
-        const badURL = "http://i.imgur.com/removed.png";
-
-        xhttp.open("GET", imgurURL, true);
-        xhttp.setRequestHeader("Content-type", "image/jpeg");
-        xhttp.send();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4) {
-                let respURL = xhttp.responseURL;
-                if (respURL == badURL) {
-                    squaresApp.changeBackground();
-                } else {
-                    squareArea.style.backgroundImage = "url('" + respURL + "')";
-                }
-            }
-        };
+        squareArea.style.backgroundColor = squaresApp.getRandomColor();
     },
 
     generateInitialSquares: function () {
@@ -139,12 +111,10 @@ window.onload = () => {
     let addSquareButton = document.getElementById("add");
     let changeColorsButton = document.getElementById("colors");
     let addTriangleButton = document.getElementById("add-triangle");
-    let addPolygonButton = document.getElementById("add-polygon");
-    let changeBackgroundButton = document.getElementById("random-background");
+    let changeBackgroundButton = document.getElementById("change-background");
 
     addSquareButton.onclick = squaresApp.addSquare;
     changeColorsButton.onclick = squaresApp.changeColors;
     addTriangleButton.onclick = squaresApp.addTriangle;
-    addPolygonButton.onclick = squaresApp.addPolygon;
     changeBackgroundButton.onclick = squaresApp.changeBackground;
 };
