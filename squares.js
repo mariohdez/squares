@@ -4,6 +4,7 @@ let squaresApp = {
     maxZ: 1000,
 
     triangle: "triangle",
+    square: "square",
 
     getRandomColor: function () {
         let numbers = "0123456789abcdef";
@@ -16,30 +17,6 @@ let squaresApp = {
         return result;
     },
 
-    getRandomPolygonArgs: function () {
-        let rand = parseInt(Math.random() * 20);
-        let result = "("
-        let i = 0;
-
-        for (i = 0; i < rand; i += 1) {
-            result += parseInt(Math.random() * 100) + "% ";
-            result += parseInt(Math.random() * 100) + "%, ";
-        }
-        result = result.slice(0, -2) + ")";
-        return result;
-    },
-
-    getRandomImgurURL: function () {
-        let alphanum = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        let result = "http://i.imgur.com/";
-        let i = 0;
-
-        for (i = 0; i < 5; i += 1) {
-            result += alphanum.charAt(parseInt(Math.random() * alphanum.length));
-        }
-        return result + ".gif";
-    },
-
     changeColors: function () {
         const shapes = document.querySelectorAll("#squarearea div");
         let i = 0;
@@ -49,8 +26,6 @@ let squaresApp = {
                 shapes[i].style.backgroundColor = squaresApp.getRandomColor();
             } else if (shapes[i].classList.contains(squaresApp.triangle)) {
                 shapes[i].style.borderBottomColor = squaresApp.getRandomColor();
-            } else {
-                shapes[i].style.backgroundColor = squaresApp.getRandomColor();
             }
         }
     },
@@ -67,12 +42,23 @@ let squaresApp = {
         }
     },
 
+    triangleClick: function (mouseEvent) {
+        const triangle = mouseEvent.target;
+        const oldZIndex = parseInt(triangle.style.zIndex);
+        if (oldZIndex == squaresApp.maxZ) {
+            triangle.parentNode.removeChild(triangle);
+        } else {
+            squaresApp.maxZ += 1;
+            triangle.style.zIndex = squaresApp.maxZ;
+        }
+    },
+
     addSquare: function () {
         let squareArea = document.getElementById("squarearea");
         let square = document.createElement("div");
 
         square.onclick = squaresApp.squareClick;
-        square.className = "square";
+        square.className = squaresApp.square;
         square.style.left = parseInt(Math.random() * 650) + "px";
         square.style.top = parseInt(Math.random() * 250) + "px";
         square.style.backgroundColor = squaresApp.getRandomColor();
@@ -83,6 +69,7 @@ let squaresApp = {
         let squareArea = document.getElementById("squarearea");
         let triangle = document.createElement("div");
 
+        triangle.onclick = squaresApp.triangleClick;
         triangle.className = squaresApp.triangle;
         triangle.style.left = parseInt(Math.random() * 650) + "px";
         triangle.style.top = parseInt(Math.random() * 250) + "px";
@@ -95,18 +82,25 @@ let squaresApp = {
         squareArea.style.backgroundColor = squaresApp.getRandomColor();
     },
 
-    generateInitialSquares: function () {
+    generateInitialShapes: function () {
         const numberOfSquares = parseInt(Math.random() * 21) + 30;
         let i = 0;
+        let rand = 0;
 
         for (i = 0; i < numberOfSquares; i += 1) {
-            squaresApp.addSquare();
+            rand = Math.floor(Math.random() * 2);
+            if (rand === 1) {
+                squaresApp.addSquare();
+            } else {
+                squaresApp.addTriangle();
+            }
         }
+        squaresApp.changeBackground();
     }
 };
 
 window.onload = () => {
-    squaresApp.generateInitialSquares();
+    squaresApp.generateInitialShapes();
 
     let addSquareButton = document.getElementById("add");
     let changeColorsButton = document.getElementById("colors");
